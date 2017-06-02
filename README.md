@@ -1,0 +1,1 @@
+# example_minimum_form_for_springboot
