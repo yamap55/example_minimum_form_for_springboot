@@ -18,4 +18,11 @@ public class DemoApplication {
 	public String index(Model model) {
 		return "index";
 	}
+
+	@RequestMapping("result")
+	public String result(Model model) {
+		// TODO 入力チェック
+		// TODO DBに保存
+		return "result";
+	}
 }
