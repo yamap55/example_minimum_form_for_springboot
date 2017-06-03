@@ -1,9 +1,13 @@
 package com.example.demo;
 
+import javax.validation.Valid;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @SpringBootApplication
@@ -15,13 +19,16 @@ public class DemoApplication {
 	}
 
 	@RequestMapping("/")
-	public String index(Model model) {
+	public String index(InputForm form, Model model) {
+		model.addAttribute("inputForm", form);
 		return "index";
 	}
 
 	@RequestMapping("result")
-	public String result(Model model) {
-		// TODO 入力チェック
+	public String result(@ModelAttribute("inputForm") @Valid InputForm form, BindingResult bindingResult, Model model) {
+	    if (bindingResult.hasErrors()) {
+	        return index(form, model);
+	    }
 		// TODO DBに保存
 		return "result";
 	}
